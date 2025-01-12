@@ -175,12 +175,12 @@
             # pythonImportsCheck = [ pythonpackage ];
 
             unpackPhase = ''
-              cp -r ${src} .
-              sourceRoot=$(ls | grep -v env-vars)
-              find $sourceRoot -type d -exec chmod 777 {} \;
-              cp ${pyprojectToml} $sourceRoot/pyproject.toml
-              cp ${bannerTemplate} $sourceRoot/${banner_file}
-              cp ${entrypointTemplate} $sourceRoot/entrypoint.sh
+              command cp -r ${src} .
+              sourceRoot=$(command ls | command grep -v env-vars)
+              command find $sourceRoot -type d -exec chmod 777 {} \;
+              command cp ${pyprojectToml} $sourceRoot/pyproject.toml
+              command cp ${bannerTemplate} $sourceRoot/${banner_file}
+              command cp ${entrypointTemplate} $sourceRoot/entrypoint.sh
             '';
 
             postPatch = ''
@@ -192,22 +192,32 @@
                 --replace "@BANNER@" "$out/bin/banner.sh"
             '';
 
-            postInstall = ''
-              pushd /build/$sourceRoot
-              for f in $(find . -name '__init__.py'); do
+            postInstall = with python.pkgs; ''
+              command pushd /build/$sourceRoot
+              for f in $(command find . -name '__init__.py'); do
                 if [[ ! -e $out/lib/python${pythonMajorMinorVersion}/site-packages/$f ]]; then
-                  cp $f $out/lib/python${pythonMajorMinorVersion}/site-packages/$f;
+                  command cp $f $out/lib/python${pythonMajorMinorVersion}/site-packages/$f;
                 fi
               done
-              popd
-              mkdir $out/dist $out/bin
-              cp dist/${wheelName} $out/dist
-              cp /build/$sourceRoot/entrypoint.sh $out/bin/${entrypoint}.sh
-              chmod +x $out/bin/${entrypoint}.sh
-              echo '#!/usr/bin/env sh' > $out/bin/banner.sh
-              echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/banner.sh
-              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${banner_file} \$@" >> $out/bin/banner.sh
-              chmod +x $out/bin/banner.sh
+              command popd
+              command mkdir -p $out/bin $out/dist $out/deps/flakes $out/deps/nixpkgs
+              command cp dist/${wheelName} $out/dist
+              command cp /build/$sourceRoot/entrypoint.sh $out/bin/${entrypoint}.sh
+              command chmod +x $out/bin/${entrypoint}.sh
+              command echo '#!/usr/bin/env sh' > $out/bin/banner.sh
+              command echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/banner.sh
+              command echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${banner_file} \$@" >> $out/bin/banner.sh
+              command chmod +x $out/bin/banner.sh
+              for dep in ${pythoneda-shared-pythonlang-application} ${pythoneda-shared-pythonlang-domain} ${pythoneda-tools-runtime-flow-inspector} ${pythoneda-tools-runtime-flow-inspector-infrastructure}; do
+                command cp -r $dep/dist/* $out/deps || true
+                if [ -e $dep/deps ]; then
+                  command cp -r $dep/deps/* $out/deps || true
+                fi
+                METADATA=$dep/lib/python${pythonMajorMinorVersion}/site-packages/*.dist-info/METADATA
+                NAME="$(command grep -m 1 '^Name: ' $METADATA | command cut -d ' ' -f 2)"
+                VERSION="$(command grep -m 1 '^Version: ' $METADATA | command cut -d ' ' -f 2)"
+                command ln -s $dep $out/deps/flakes/$NAME-$VERSION || true
+              done
             '';
 
             meta = with pkgs.lib; {
