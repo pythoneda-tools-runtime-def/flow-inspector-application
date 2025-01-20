@@ -26,7 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/application/0.0.112";
+      url = "github:pythoneda-shared-pythonlang-def/application/0.0.113";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
@@ -58,7 +58,7 @@
         "pythoneda-shared-pythonlang-domain";
       inputs.pythoneda-tools-runtime-flow-inspector.follows =
         "pythoneda-tools-runtime-flow-inspector";
-      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.10";
+      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.11";
     };
   };
   outputs = inputs:
@@ -73,8 +73,8 @@
       let
         org = "pythoneda-tools-runtime";
         repo = "flow-inspector-application";
-        version = "0.0.1";
-        sha256 = "1msv3vwgn67w5vpvb53f56ac1j9npxwaaldl96ripqybmy204pyb";
+        version = "0.0.2";
+        sha256 = "0d6s9k9413gvfh1iz80vkk3bizpgg2r41r6ii7lsxdak8n4nay5k";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.tools.runtime.flow_inspector.application";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
