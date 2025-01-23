@@ -20,25 +20,25 @@
   description = "Nix flake for pythoneda-tools-runtime/flow-inspector-application";
   inputs = rec {
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/24.05";
     pythoneda-shared-pythonlang-application = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/application/0.0.113";
+      url = "github:pythoneda-shared-pythonlang-def/application/0.0.116";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:pythoneda-shared-pythonlang-def/banner/0.0.80";
+      url = "github:pythoneda-shared-pythonlang-def/banner/0.0.83";
     };
     pythoneda-shared-pythonlang-domain = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.116";
+      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.123";
     };
     pythoneda-tools-runtime-flow-inspector = {
       inputs.flake-utils.follows = "flake-utils";
@@ -47,7 +47,7 @@
         "pythoneda-shared-pythonlang-banner";
       inputs.pythoneda-shared-pythonlang-domain.follows =
         "pythoneda-shared-pythonlang-domain";
-      url = "github:pythoneda-tools-runtime-def/flow-inspector/0.0.10";
+      url = "github:pythoneda-tools-runtime-def/flow-inspector/0.0.12";
     };
     pythoneda-tools-runtime-flow-inspector-infrastructure = {
       inputs.flake-utils.follows = "flake-utils";
@@ -58,7 +58,7 @@
         "pythoneda-shared-pythonlang-domain";
       inputs.pythoneda-tools-runtime-flow-inspector.follows =
         "pythoneda-tools-runtime-flow-inspector";
-      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.11";
+      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.13";
     };
   };
   outputs = inputs:
@@ -73,8 +73,8 @@
       let
         org = "pythoneda-tools-runtime";
         repo = "flow-inspector-application";
-        version = "0.0.2";
-        sha256 = "0d6s9k9413gvfh1iz80vkk3bizpgg2r41r6ii7lsxdak8n4nay5k";
+        version = "0.0.3";
+        sha256 = "0lzfwmdd29hjd1g8j5shpydhcw6qmnvrcyahxjn2f0mx4spy2bx2";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.tools.runtime.flow_inspector.application";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
