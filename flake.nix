@@ -26,7 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/application/0.0.122";
+      url = "github:pythoneda-shared-pythonlang-def/application/0.0.123";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
@@ -38,7 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pythoneda-shared-pythonlang-banner.follows =
         "pythoneda-shared-pythonlang-banner";
-      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.128";
+      url = "github:pythoneda-shared-pythonlang-def/domain/0.0.129";
     };
     pythoneda-tools-runtime-flow-inspector = {
       inputs.flake-utils.follows = "flake-utils";
@@ -47,7 +47,7 @@
         "pythoneda-shared-pythonlang-banner";
       inputs.pythoneda-shared-pythonlang-domain.follows =
         "pythoneda-shared-pythonlang-domain";
-      url = "github:pythoneda-tools-runtime-def/flow-inspector/0.0.15";
+      url = "github:pythoneda-tools-runtime-def/flow-inspector/0.0.16";
     };
     pythoneda-tools-runtime-flow-inspector-infrastructure = {
       inputs.flake-utils.follows = "flake-utils";
@@ -58,7 +58,7 @@
         "pythoneda-shared-pythonlang-domain";
       inputs.pythoneda-tools-runtime-flow-inspector.follows =
         "pythoneda-tools-runtime-flow-inspector";
-      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.16";
+      url = "github:pythoneda-tools-runtime-def/flow-inspector-infrastructure/0.0.17";
     };
   };
   outputs = inputs:
